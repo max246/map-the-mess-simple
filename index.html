@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report Collection – Map the Mess</title>
+  <meta name="description" content="Forward a fly-tipping or large-waste collection request straight to FixMyStreet.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="logo.svg" alt="" width="32" height="32">
+    <span>Map the Mess</span>
+  </header>
+
+  <main>
+    <section id="form-view">
+      <h1>📨 Report Collection</h1>
+      <p class="muted">
+        Forward a fly-tipping or large-waste collection request to FixMyStreet. They'll email you to
+        confirm before the report goes live.
+      </p>
+
+      <form id="report-form" novalidate>
+        <fieldset class="you">
+          <legend>Your details</legend>
+          <label>
+            <span>Name <span class="req">*</span></span>
+            <input type="text" name="name" id="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email <span class="req">*</span></span>
+            <input type="email" name="email" id="email" autocomplete="email" required>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="remember" checked>
+            <span>Remember my details on this device</span>
+          </label>
+          <p class="hint">FixMyStreet shows your name as e.g. “Sam T.” and emails you to confirm.</p>
+        </fieldset>
+
+        <div class="field">
+          <span class="label">Photo</span>
+          <input type="file" id="photo" accept="image/jpeg,image/png" hidden>
+          <button type="button" id="photo-pick" class="dropzone">
+            <span class="plus">+</span>
+            <span>Click to upload one photo</span>
+          </button>
+          <div id="photo-preview" class="preview" hidden>
+            <img alt="Upload">
+            <button type="button" id="photo-remove" aria-label="Remove photo">X</button>
+          </div>
+        </div>
+
+        <label class="field">
+          <span class="label">Description</span>
+          <textarea name="description" id="description" rows="3"
+            placeholder="What's been dumped? e.g. Mattress and bin bags by the lay-by"></textarea>
+        </label>
+
+        <div class="field">
+          <span class="label">Location <span class="req">*</span></span>
+          <p id="location-text" class="hint">Tap the map to place a pin, or use the 📍 button to find your location</p>
+          <p class="hint small">Drag the pin or tap the map to adjust</p>
+          <div id="map"></div>
+          <button type="button" id="location-reset" class="link" hidden>Reset location</button>
+        </div>
+
+        <div id="progress" class="progress" hidden>
+          <div class="progress-label"><span>Submitting…</span><span id="progress-pct">0%</span></div>
+          <div class="bar"><div id="progress-bar"></div></div>
+        </div>
+        <button type="submit" id="submit" class="primary">Send to FixMyStreet</button>
+      </form>
+    </section>
+
+    <section id="done-view" class="done" hidden>
+      <div class="big">📨</div>
+      <h1>Forwarded to FixMyStreet</h1>
+      <p class="muted">
+        We've sent your report to FixMyStreet. They'll email you to confirm — please open the
+        email to finalise the submission.
+      </p>
+      <button type="button" id="again" class="link">Submit another report</button>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
